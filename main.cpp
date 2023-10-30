@@ -2,30 +2,14 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include "A.h"
 
 int main(int argc, char* argv[])
 {
-    SDL_Window* window = NULL;
-    int statut = EXIT_FAILURE;
+    Window window;
 
-    if (0 != SDL_Init(SDL_INIT_VIDEO))
-    {
-        fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
-        goto Quit;
-    }
-    window = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        640, 480, SDL_WINDOW_SHOWN);
-    if (NULL == window)
-    {
-        fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
-        goto Quit;
-    }
+    window.window();
 
-    statut = EXIT_SUCCESS;
-    SDL_Delay(3000);
-    SDL_DestroyWindow(window);
-Quit:
-    SDL_Quit();
-    return statut;
+    return 0;
 }
 
