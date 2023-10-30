@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +13,7 @@ int main(int argc, char* argv[])
         fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
         goto Quit;
     }
-    window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+    window = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         640, 480, SDL_WINDOW_SHOWN);
     if (NULL == window)
     {
