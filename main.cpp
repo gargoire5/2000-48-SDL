@@ -6,10 +6,21 @@
 
 int main(int argc, char* argv[])
 {
-    Window window;
+    std::cout << " main";
+    Window w;
+    std::cout << " demain";
 
-    window.window();
+    w.window();
 
+    std::cout << " main";
+
+    GameObject go(50, 50, 10, 10);
+    std::cout << " go";
+    go.Draw(w.GetRenderer(),w.GetWindow());
+    std::cout << "changement";
+
+    
+    
     return 0;
 }
 

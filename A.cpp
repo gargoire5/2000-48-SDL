@@ -3,52 +3,102 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "A.h"
-int WIDTH = 1080;
+int WIDTH = 720;
 int HEIGHT = 720;
+int TAILLE = HEIGHT/4;
 
-Window::Window() {  
+Window::Window() {
 }
 
-    void Window::window() {
-        SDL_Window* window = NULL;
+void Window::window() {
 
-        if (0 != SDL_Init(SDL_INIT_VIDEO))
-        {
-            fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
-        }
-        window = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-            WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
-        if (NULL == window)
-        {
-            fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
-        }
+    if (0 != SDL_Init(SDL_INIT_VIDEO))
+    {
+        fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
+    }
+    
+    Window::fenetre = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
+    if (Window::fenetre == NULL)
+    {
+        fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
+    }
+
+    renderer = SDL_CreateRenderer(Window::fenetre, -1, 0);
+
+    if (renderer == NULL)//gestion des erreurs
+    {
+        fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
+    }
 
 
-        SDL_Event events;
-        bool isOpen{ true };
-        while (isOpen)
+
+    SDL_DestroyWindow(fenetre);
+    SDL_DestroyRenderer(renderer);
+    SDL_Quit();
+
+
+}
+
+
+SDL_Renderer* Window::GetRenderer()
+{
+    return  Window::renderer;
+}
+
+SDL_Window* Window::GetWindow()
+{
+    return  Window::fenetre;
+}
+
+GameObject::GameObject(int x, int y, int w, int h) {
+    cases = { x, y, w, h };
+}
+
+void GameObject::Draw(SDL_Renderer* renderer, SDL_Window* fenetre)
+{
+    SDL_Event events;
+    bool isOpen{ true };
+    while (isOpen)
+    {
+        //EVENT
+        while (SDL_PollEvent(&events))
         {
-            while (SDL_PollEvent(&events))
+            switch (events.type)
             {
-                switch (events.type)
-                {
-                case SDL_KEYDOWN:
-                    switch (events.key.keysym.sym) {
-                    case SDLK_f:
-                        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-                        break;
-                    case SDLK_ESCAPE:
-                        SDL_SetWindowFullscreen(window, 0);
-                        break;
-                    }
+            case SDL_KEYDOWN:
+                switch (events.key.keysym.sym) {
+                case SDLK_f:
+                    SDL_SetWindowFullscreen(fenetre, SDL_WINDOW_FULLSCREEN_DESKTOP);
                     break;
-                case SDL_QUIT:
-                    isOpen = false;
+                case SDLK_ESCAPE:
+                    SDL_SetWindowFullscreen(fenetre, 0);
                     break;
-
                 }
+                break;
+            case SDL_QUIT:
+                isOpen = false;
+                break;
+
             }
         }
 
-        SDL_Quit();
+        //UPDATE
+
+        //DRAW
+
+        SDL_SetRenderDrawColor(renderer, 255, 0, 255, 0);
+
+
+        SDL_RenderClear(renderer);
+
+        SDL_RenderDrawRect(renderer, &cases);
+
+
+        SDL_RenderPresent(renderer);
+
     }
+ 
+    
+
+}
