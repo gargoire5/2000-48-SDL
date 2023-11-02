@@ -52,10 +52,7 @@ int main(int argc, char* argv[])
 		SDL_RenderPresent(w.GetRenderer());
 				
 
-		
-
-
-		//go.Image(w.GetRenderer(), w.GetWindow());
+		go.Image(w.GetRenderer(), w.GetWindow());
 
 		w.Update();
 
