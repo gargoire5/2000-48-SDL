@@ -25,7 +25,7 @@ public:
 	//~GameObject(); //Destructeur
 
 
-	void Draw(SDL_Renderer* renderer);
-	void Image(SDL_Renderer* renderer, SDL_Window* fenetre);
+	void Grille(SDL_Renderer* renderer); //affiche la grille
+	void Image(SDL_Renderer* renderer, SDL_Window* fenetre); //affiche une image
 
 };

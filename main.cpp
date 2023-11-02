@@ -46,11 +46,13 @@ int main(int argc, char* argv[])
 		w.Clear();
 
 		//DRAW
-
-		go.Draw(w.GetRenderer());
+		 
+		SDL_SetRenderDrawColor(w.GetRenderer(), 0, 0, 0, 0);
+		go.Grille(w.GetRenderer());
+		SDL_RenderPresent(w.GetRenderer());
 				
 
-		SDL_SetRenderDrawColor(w.GetRenderer(), 0, 0, 0, 0);
+		
 
 
 		//go.Image(w.GetRenderer(), w.GetWindow());

@@ -63,11 +63,8 @@ GameObject::GameObject(int x, int y, int w, int h) {
 	cases = { x, y, w, h };
 }
 
-void GameObject::Draw(SDL_Renderer* renderer) //crée la grille de jeu
+void GameObject::Grille(SDL_Renderer* renderer) //crée la grille de jeu
 {
-	std::cout << "je draw";
-
-
 	SDL_Rect cases[16];
 
 
@@ -88,13 +85,11 @@ void GameObject::Draw(SDL_Renderer* renderer) //crée la grille de jeu
 	}
 
 	SDL_RenderDrawRects(renderer, cases, 16);
-	std::cout << "fin draw";
 }
 
 
 void GameObject::Image(SDL_Renderer* renderer, SDL_Window* fenetre)
 {
-	//On charge une Image (SDL_Surface)
 	SDL_Surface* pSurface = SDL_LoadBMP("IMG/2.bmp");
 	if (pSurface == NULL)
 	{
