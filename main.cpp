@@ -6,20 +6,60 @@
 
 int main(int argc, char* argv[])
 {
-    std::cout << " main";
     Window w;
-    std::cout << " demain";
-
-    w.window();
-
-    std::cout << " main";
 
     GameObject go(50, 50, 10, 10);
-    std::cout << " go";
-    go.Draw(w.GetRenderer(),w.GetWindow());
-    std::cout << "changement";
 
-    
-    
+
+    SDL_Event events;
+    bool isOpen{ true };
+    while (isOpen)
+    {
+		
+		//EVENT
+		while (SDL_PollEvent(&events))
+		{
+			switch (events.type) 
+			{
+			case SDL_KEYDOWN: 
+				switch (events.key.keysym.sym) { 
+				case SDLK_f:
+					SDL_SetWindowFullscreen(w.GetWindow(), SDL_WINDOW_FULLSCREEN_DESKTOP);
+					break;
+				case SDLK_ESCAPE: 
+					SDL_SetWindowFullscreen(w.GetWindow(), 0);
+					break;
+				case SDLK_a: 
+					isOpen = false; 
+					break;
+				}
+				break;
+			case SDL_QUIT: 
+				isOpen = false; 
+				break;
+
+			}
+		}
+
+		//UPDATE
+
+		w.Clear();
+
+		//DRAW
+
+		go.Draw(w.GetRenderer());
+				
+
+		SDL_SetRenderDrawColor(w.GetRenderer(), 0, 0, 0, 0);
+
+
+		//go.Image(w.GetRenderer(), w.GetWindow());
+
+		w.Update();
+
+    }
+
+    SDL_Quit();
     return 0;
 }
+
