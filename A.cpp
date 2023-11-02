@@ -5,24 +5,23 @@
 #include "A.h"
 int WIDTH = 720;
 int HEIGHT = 720;
-int TAILLE = HEIGHT/4;
+int TAILLE = HEIGHT / 4;
 
 Window::Window() {
 }
 
 void Window::window() {
 
-    if (0 != SDL_Init(SDL_INIT_VIDEO))
-    {
-        fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
-    }
-    
-    Window::fenetre = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
-    if (Window::fenetre == NULL)
-    {
-        fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
-    }
+        if (0 != SDL_Init(SDL_INIT_VIDEO))
+        {
+            fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
+        }
+        window = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+            WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
+        if (NULL == window)
+        {
+            fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
+        }
 
     renderer = SDL_CreateRenderer(Window::fenetre, -1, 0);
 
@@ -80,25 +79,9 @@ void GameObject::Draw(SDL_Renderer* renderer, SDL_Window* fenetre)
                 isOpen = false;
                 break;
 
+                }
             }
         }
 
-        //UPDATE
-
-        //DRAW
-
-        SDL_SetRenderDrawColor(renderer, 255, 0, 255, 0);
-
-
-        SDL_RenderClear(renderer);
-
-        SDL_RenderDrawRect(renderer, &cases);
-
-
-        SDL_RenderPresent(renderer);
-
+        SDL_Quit();
     }
- 
-    
-
-}
