@@ -11,7 +11,7 @@ public:
 	SDL_Renderer* GetRenderer();
 	SDL_Window* GetWindow();
 
-
+	
 	void Update();
 	void Clear();
 };
@@ -34,9 +34,16 @@ public:
 
 	int unto2D(int case1D);
 	int deuxto1D(int x, int y);
-
+ 
 	void AddImage(SDL_Renderer* renderer, SDL_Rect rect);
 
 	void AddRandomTile();
 
+	void MoveUp();
+
+	void MoveDown();
+
+	void MoveLeft();
+
+	void MoveRight();
 };
