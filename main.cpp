@@ -41,16 +41,15 @@ int main(int argc, char* argv[])
 	GameObject go16(540, 540, 10, 10);
 
 
-
-	SDL_Event events;
-	bool isOpen{ true };
-	const char* key;
-	while (isOpen)
-	{
-		//getKeyName(event...)
+    SDL_Event events;
+    bool isOpen = true ;
+	bool isAction = false;
+    while (isOpen)
+    {
 		//EVENT
 		while (SDL_PollEvent(&events))
 		{
+			isAction = false;
 			switch (events.type)
 			{
 			case SDL_QUIT:
@@ -72,24 +71,32 @@ int main(int argc, char* argv[])
 
 				case SDLK_z:
 					std::cout << "Z" << std::endl;
+					isAction = true;
+					go.MoveUp();
 					break;
 
 				case SDLK_q:
 					std::cout << "Q" << std::endl;
+					isAction = true;
 					break;
 
 				case SDLK_s:
 					std::cout << "S" << std::endl;
+					isAction = true;
 					break;
 
 				case SDLK_d:
 					std::cout << "D" << std::endl;
+					go.MoveRight();
+					isAction = true;
 					break;
 
 				default:
 					continue;
 				}
 			}
+			go.AddRandomTile();
+
 		}
 
 		//UPDATE
@@ -97,53 +104,47 @@ int main(int argc, char* argv[])
 		w.Clear();
 
 		//DRAW
+		 
+		SDL_SetRenderDrawColor(w.GetRenderer(), 0, 0, 0, 0); 
+		go.Grille(w.GetRenderer()); 
+		go2.Grille(w.GetRenderer()); 
+		go3.Grille(w.GetRenderer()); 
+		go4.Grille(w.GetRenderer()); 
+		go5.Grille(w.GetRenderer()); 
+		go6.Grille(w.GetRenderer()); 
+		go7.Grille(w.GetRenderer()); 
+		go8.Grille(w.GetRenderer()); 
+		go9.Grille(w.GetRenderer()); 
+		go10.Grille(w.GetRenderer()); 
+		go11.Grille(w.GetRenderer()); 
+		go12.Grille(w.GetRenderer()); 
+		go13.Grille(w.GetRenderer()); 
+		go14.Grille(w.GetRenderer()); 
+		go15.Grille(w.GetRenderer()); 
+		go16.Grille(w.GetRenderer()); 
 
-		SDL_SetRenderDrawColor(w.GetRenderer(), 0, 0, 0, 0);
-		go.Grille(w.GetRenderer());
-		go2.Grille(w.GetRenderer());
-		go3.Grille(w.GetRenderer());
-		go4.Grille(w.GetRenderer());
-		go5.Grille(w.GetRenderer());
-		go6.Grille(w.GetRenderer());
-		go7.Grille(w.GetRenderer());
-		go8.Grille(w.GetRenderer());
-		go9.Grille(w.GetRenderer());
-		go10.Grille(w.GetRenderer());
-		go11.Grille(w.GetRenderer());
-		go12.Grille(w.GetRenderer());
-		go13.Grille(w.GetRenderer());
-		go14.Grille(w.GetRenderer());
-		go15.Grille(w.GetRenderer());
-		go16.Grille(w.GetRenderer());
 
 
-		//go.Image(w.GetRenderer(), w.GetWindow());
-		go.AddImage(w.GetRenderer(), go.rect);
-		go2.AddImage(w.GetRenderer(), go2.rect);
-		go3.AddImage(w.GetRenderer(), go3.rect);
-		go4.AddImage(w.GetRenderer(), go4.rect);
-		go5.AddImage(w.GetRenderer(), go5.rect);
-		go6.AddImage(w.GetRenderer(), go6.rect);
-		go7.AddImage(w.GetRenderer(), go7.rect);
-		go8.AddImage(w.GetRenderer(), go8.rect);
-		go9.AddImage(w.GetRenderer(), go9.rect);
-		go10.AddImage(w.GetRenderer(), go10.rect);
-		go11.AddImage(w.GetRenderer(), go11.rect);
-		go12.AddImage(w.GetRenderer(), go12.rect);
-		go13.AddImage(w.GetRenderer(), go13.rect);
-		go14.AddImage(w.GetRenderer(), go14.rect);
-		go15.AddImage(w.GetRenderer(), go15.rect);
+		go.AddImage(w.GetRenderer(), go.rect); 
+		go2.AddImage(w.GetRenderer(), go2.rect); 
+		go3.AddImage(w.GetRenderer(), go3.rect); 
+		go4.AddImage(w.GetRenderer(), go4.rect); 
+		go5.AddImage(w.GetRenderer(), go5.rect); 
+		go6.AddImage(w.GetRenderer(), go6.rect); 
+		go7.AddImage(w.GetRenderer(), go7.rect); 
+		go8.AddImage(w.GetRenderer(), go8.rect); 
+		go9.AddImage(w.GetRenderer(), go9.rect); 
+		go10.AddImage(w.GetRenderer(), go10.rect); 
+		go11.AddImage(w.GetRenderer(), go11.rect); 
+		go12.AddImage(w.GetRenderer(), go12.rect); 
+		go13.AddImage(w.GetRenderer(), go13.rect); 
+		go14.AddImage(w.GetRenderer(), go14.rect); 
+		go15.AddImage(w.GetRenderer(), go15.rect); 
 		go16.AddImage(w.GetRenderer(), go16.rect);
 
 		w.Update();
+    }
 
-	}
-
-	SDL_Quit();
-	return 0;
+    SDL_Quit();
+    return 0;
 }
-
-
-
-
-
